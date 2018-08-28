@@ -1,0 +1,22 @@
+[Unit]
+Description=Tiny Tiny RSS update daemon
+After=network.target mysqld.service
+Requires=network.target remote-fs.target nss-lookup.target mysql.service
+ 
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory={{ ttrss_install_path }}
+Type=simple
+StandardOutput=null
+StandardError=syslog
+ExecStart=/usr/bin/php ./update_daemon2.php
+PrivateTmp=true
+InaccessibleDirectories=/home /root /boot /opt /mnt /media
+ReadOnlyDirectories=/etc /usr
+Restart=always
+RestartSec=5
+ 
+[Install]
+WantedBy=multi-user.target
+

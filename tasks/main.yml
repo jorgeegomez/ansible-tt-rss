@@ -92,21 +92,21 @@
     - fastcgi
     - accesslog
 
-- name: Ensure init.d script for update-daemon is availaible
+- name: Ensure systemd script for update-daemon is availaible
   copy:
-    src: tt-rss
-    dest: /etc/init.d/tt-rss
-    mode: 0755
+    src: tt-rss-update.service.j2
+    dest: /lib/systemd/system/tt-rss-update.service
+    mode: 0644
 
-- name: Ensure config for update-daemon is availaible
+- name: Ensure config for update-daemon is available
   template:
     src: default-tt-rss.j2
     dest: /etc/default/tt-rss
   notify:
     - Restart tt-rss daemon
 
-- name: Ensure init.d script for update-daemon is enabled and runs
-  service:
-    name: tt-rss
+- name: Ensure systemd service for update-daemon is enabled and runs
+  systemd:
+    name: tt-rss-update
     enabled: yes
     state: started
