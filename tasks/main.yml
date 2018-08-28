@@ -10,6 +10,8 @@
   - php-apcu
   - php-curl
   - php-cli
+  - php-mbstring
+  - php-xml
   - postgresql
   - python-psycopg2
   - libpq-dev
