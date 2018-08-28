@@ -93,7 +93,7 @@
     - accesslog
 
 - name: Ensure systemd script for update-daemon is availaible
-  copy:
+  template:
     src: tt-rss-update.service.j2
     dest: /lib/systemd/system/tt-rss-update.service
     mode: 0644
