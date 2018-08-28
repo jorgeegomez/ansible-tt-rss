@@ -78,6 +78,14 @@
     - { src: 20-tt-rss.conf.j2, dest: /etc/lighttpd/conf-available/20-tt-rss.conf }
     - { src: 15-fastcgi-php-fpm.conf.j2, dest: /etc/lighttpd/conf-available/15-fastcgi-php-fpm.conf }
 
+- name: Change document root location for lighttpd
+  lineinfile:
+    dest: "/etc/lighttpd/lighttpd.conf"
+    regexp: "^server.document-root"
+    state: "present"
+    line: 'server.document-root        = "{{ ttrss_install_path }}"'
+  notify: Restart lighttpd
+
 - name: Ensure lighttpd modules are loaded
   command: /usr/sbin/lighty-enable-mod "{{ item }}"
   register: result
