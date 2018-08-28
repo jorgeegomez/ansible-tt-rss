@@ -12,6 +12,7 @@
   - php-cli
   - php-mbstring
   - php-xml
+  - php-gd
   - postgresql
   - python-psycopg2
   - libpq-dev
