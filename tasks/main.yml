@@ -3,14 +3,16 @@
 - name: Ensure needed packages are installed
   apt: name={{ item }} state=present
   with_items:
-  - php5
-  - php5-pgsql
-  - php5-fpm
-  - php-apc
-  - php5-curl
-  - php5-cli
+  - php
+  - php-pgsql
+  - php-fpm
+  - php-opcache
+  - php-apcu
+  - php-curl
+  - php-cli
   - postgresql
   - python-psycopg2
+  - libpq-dev
   - lighttpd
   - git
 
@@ -18,7 +20,8 @@
   become_user: postgres
   postgresql_user: 
     name: "{{ ttrss_db_user }}"
-    password: "{{ ttrss_db_password }}"
+    password: " ttrss_db_password }}"
+    encrypted: yes
     state: present
 
 - name: "Ensure database is present"
